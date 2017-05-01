@@ -7,7 +7,7 @@ package employee.payroll;
 
 /**
  *
- * @author Acer
+ * @author DilinieSeimon
  */
 public class EmployeePayroll {
 
