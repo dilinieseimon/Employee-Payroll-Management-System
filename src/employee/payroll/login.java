@@ -17,7 +17,7 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Acer
+ * @author DilinieSeimon
  */
 public class login extends javax.swing.JFrame {
 Connection conn = null;
@@ -65,9 +65,9 @@ PreparedStatement pst = null;
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_combo = new javax.swing.JComboBox<>();
-        txt_password = new javax.swing.JTextField();
         txt_username = new javax.swing.JTextField();
         btn_login = new javax.swing.JButton();
+        txt_password = new javax.swing.JPasswordField();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         lbl_date = new javax.swing.JMenu();
@@ -112,17 +112,16 @@ PreparedStatement pst = null;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(50, 50, 50)
-                        .addComponent(txt_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(118, Short.MAX_VALUE))
+                        .addComponent(txt_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_username, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(txt_password))))
+                .addContainerGap(127, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(184, 184, 184)
                 .addComponent(btn_login)
@@ -239,7 +238,7 @@ PreparedStatement pst = null;
     private javax.swing.JMenu lbl_date;
     private javax.swing.JMenu lbl_time;
     private javax.swing.JComboBox<String> txt_combo;
-    private javax.swing.JTextField txt_password;
+    private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

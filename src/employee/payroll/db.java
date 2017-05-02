@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Acer
+ * @author DilinieSeimon
  */
 public class db {
     public static Connection java_db() {
