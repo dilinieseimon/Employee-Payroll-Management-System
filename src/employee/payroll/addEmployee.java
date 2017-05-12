@@ -350,6 +350,9 @@ public class addEmployee extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRecordActionPerformed
+        int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to add record?","Add Record",JOptionPane.YES_NO_OPTION);
+        if(x==0){
+        
         try{
             String sql ="insert into EmpDetails (nic,first_name,surname,dob,email,telephone,address,department,image,salary,gender,designation,status,job_title,date_hired) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
             pst=conn.prepareStatement(sql);
@@ -373,6 +376,25 @@ public class addEmployee extends javax.swing.JFrame {
         } catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
+        try{
+            String sq ="SELECT * FROM EmpDetails WHERE (id) NOT IN(SELECT id FROM Users)";
+            pst=conn.prepareStatement(sq);
+            rs=pst.executeQuery();
+            while(rs.next()){
+                String add1 =rs.getString("id");
+                String add2 =rs.getString("first_name");
+                String add3 =rs.getString("dob");
+                String password = add3.replace("/","");
+                String add4 = rs.getString("department");
+                
+                String sql = "INSERT INTO Users (division,username,password,emp_id) VALUES ('"+add4+"','"+add2+"','"+password+"','"+add1+"')";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"User account has been created successfully "+"\nUsername : "+add2+"\nPassword : "+password);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
         finally{
             try{
                 rs.close();
@@ -380,6 +402,7 @@ public class addEmployee extends javax.swing.JFrame {
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,e);
             }
+        }
         }
     }//GEN-LAST:event_btn_addRecordActionPerformed
 
@@ -487,7 +510,9 @@ public class addEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_searchKeyReleased
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-         try{
+        int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete record?","Delete Record",JOptionPane.YES_NO_OPTION);
+        if(x==0){ 
+        try{
              String sql ="DELETE FROM EmpDetails WHERE id=? ";
              pst=conn.prepareStatement(sql);
              pst.setString(1, txt_id.getText());
@@ -501,11 +526,13 @@ public class addEmployee extends javax.swing.JFrame {
                  pst.close();
              }catch(Exception e){
              }
-         }
-
+        }
+        }   
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to update record?","Update Record",JOptionPane.YES_NO_OPTION);
+        if(x==0){
         try{
             String value0 = txt_nic.getText();
             String value1 = txt_firstname.getText();
@@ -533,6 +560,7 @@ public class addEmployee extends javax.swing.JFrame {
                 pst.close();
             } catch(Exception e){
             }
+        }
         }
     }//GEN-LAST:event_btn_updateActionPerformed
 
