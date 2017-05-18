@@ -57,7 +57,7 @@ public class UpdateSalary extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txt_percentage = new javax.swing.JTextField();
         txt_amount = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_updateSalary = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,8 +96,18 @@ public class UpdateSalary extends javax.swing.JFrame {
         jLabel8.setText("Update Salary");
 
         r_percentage.setText("Percentage");
+        r_percentage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                r_percentageActionPerformed(evt);
+            }
+        });
 
         r_amount.setText("Amount");
+        r_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                r_amountActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Percentage");
 
@@ -109,7 +119,12 @@ public class UpdateSalary extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Update");
+        btn_updateSalary.setText("Update");
+        btn_updateSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateSalaryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,7 +163,7 @@ public class UpdateSalary extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_updateSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -208,7 +223,7 @@ public class UpdateSalary extends javax.swing.JFrame {
                     .addComponent(txt_percentage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btn_updateSalary)
                 .addGap(82, 82, 82))
         );
 
@@ -256,6 +271,64 @@ public class UpdateSalary extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_searchKeyReleased
 
+    private void btn_updateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateSalaryActionPerformed
+        try{
+        int salary = Integer.parseInt(txt_salary.getText());
+        
+        int getPercentage = Integer.parseInt(txt_percentage.getText());
+        int calcPercentage = salary/100* getPercentage +salary;
+        String xp = String.valueOf(calcPercentage);
+        txt_salary.setText(xp);
+        
+        int getAmount = Integer.parseInt(txt_amount.getText());
+        int calcAmount = salary+ getAmount;
+        String xa = String.valueOf(calcAmount);
+        txt_salary.setText(xa);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        try{
+            String value1=txt_empid.getText();
+            String value2=txt_salary.getText();
+            
+            String sql = "UPDATE EmpDetails SET id = '"+value1+"', salary='"+value2+"' WHERE id='"+value1+"'";
+            pst=conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Record Updated");
+            
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try{
+                rs.close();
+                pst.close();
+            }catch(Exception e){
+            
+            }
+            
+        }
+    }//GEN-LAST:event_btn_updateSalaryActionPerformed
+
+    private void r_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_amountActionPerformed
+        r_amount.setSelected(true);
+        r_percentage.setSelected(false);
+        txt_amount.setEnabled(true);
+        txt_amount.setEditable(true);
+        txt_percentage.setEnabled(false);
+        txt_percentage.setText("");
+    }//GEN-LAST:event_r_amountActionPerformed
+
+    private void r_percentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_percentageActionPerformed
+        r_percentage.setSelected(true);
+        r_amount.setSelected(false);
+        txt_percentage.setEnabled(true);
+        txt_percentage.setEditable(true);
+        txt_amount.setEnabled(false);
+        txt_amount.setText("");
+    }//GEN-LAST:event_r_percentageActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -292,7 +365,7 @@ public class UpdateSalary extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_updateSalary;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
