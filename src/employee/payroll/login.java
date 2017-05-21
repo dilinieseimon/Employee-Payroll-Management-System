@@ -164,6 +164,8 @@ PreparedStatement pst = null;
             while(rs.next()){
                 int id = rs.getInt(1);
                 Emp.empId = id;
+                String username = rs.getString("username");
+                Emp.empName = username;
                 count = count+1;
             }
             String access = (txt_combo.getSelectedItem().toString());

@@ -174,7 +174,7 @@ public class UpdateSalary extends javax.swing.JFrame {
                                     .addComponent(txt_empid)
                                     .addComponent(txt_firstname)
                                     .addComponent(txt_surname, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
@@ -272,21 +272,19 @@ public class UpdateSalary extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_searchKeyReleased
 
     private void btn_updateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateSalaryActionPerformed
-        try{
-        int salary = Integer.parseInt(txt_salary.getText());
-        
+            int salary = Integer.parseInt(txt_salary.getText());
+            if(r_percentage.isSelected()==true){
         int getPercentage = Integer.parseInt(txt_percentage.getText());
         int calcPercentage = salary/100* getPercentage +salary;
         String xp = String.valueOf(calcPercentage);
         txt_salary.setText(xp);
-        
+            }
+            else if(r_amount.isSelected()==true){
         int getAmount = Integer.parseInt(txt_amount.getText());
         int calcAmount = salary+ getAmount;
         String xa = String.valueOf(calcAmount);
         txt_salary.setText(xa);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+            }
         try{
             String value1=txt_empid.getText();
             String value2=txt_salary.getText();
