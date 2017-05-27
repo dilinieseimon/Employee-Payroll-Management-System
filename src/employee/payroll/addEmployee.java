@@ -531,6 +531,7 @@ public class addEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        String value4 = txt_id.getText();
         int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to update record?","Update Record",JOptionPane.YES_NO_OPTION);
         if(x==0){
         try{
@@ -538,7 +539,6 @@ public class addEmployee extends javax.swing.JFrame {
             String value1 = txt_firstname.getText();
             String value2 = txt_surname.getText();
             String value3 = txt_dob.getText();
-            String value4 = txt_id.getText();
             String value5 = txt_email.getText();
             String value6 = txt_tel.getText();
             String value7 = txt_address.getText();
@@ -548,13 +548,27 @@ public class addEmployee extends javax.swing.JFrame {
             String value14 = txt_salary.getText();
             String value15 = txt_job.getText();
             String value16 = txt_datehired.getText();
-            String sql= "update EmpDetails set id='"+value4+"',first_name='"+value1+"', nic='"+value0+"', surname='"+value2+"', dob='"+value3+"',email='"+value5+"',telephone='"+value6+"'," + "address='"+value7+"',department='"+value8+"',designation ='"+value12+"', status ='"+value13+"', salary ='"+value14+"', job_title ='"+value15+"', date_hired ='"+value16+"' " + " where id='"+value4+"' ";
+            String sql= "update EmpDetails SET id='"+value4+"',first_name='"+value1+"', nic='"+value0+"', surname='"+value2+"', dob='"+value3+"',email='"+value5+"',telephone='"+value6+"'," + "address='"+value7+"',department='"+value8+"',designation ='"+value12+"', status ='"+value13+"', salary ='"+value14+"', job_title ='"+value15+"', date_hired ='"+value16+"' " + " where id='"+value4+"' ";
             pst=conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, "Record Updated");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
-        }finally {
+        }
+        try{
+            File file = new File(filename);
+            FileInputStream fis = new FileInputStream(file);
+            byte[] image = new byte[(int) file.length()];
+            fis.read(image);
+            String sql="UPDATE EmpDetails SET Image =? WHERE id='"+value4+"'";
+            pst=conn.prepareStatement(sql);
+            pst.setBytes(1,image);
+            pst.executeUpdate();
+            pst.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        finally {
             try{
                 rs.close();
                 pst.close();
