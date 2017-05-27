@@ -495,6 +495,16 @@ public class addEmployee extends javax.swing.JFrame {
             String add17 =rs.getString("designation");
             txt_designation.setText(add17);
             
+            String add18 = rs.getString("gender");
+            if(add18.equals("Male")){
+                rb_female.setSelected(false);
+                rb_male.setSelected(true);
+            }
+            else{
+                rb_male.setSelected(false);
+                rb_female.setSelected(true);
+            }
+            
             byte[] image = rs.getBytes("Image");
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(image).getImage().getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH));
             img.setIcon(imageIcon);
