@@ -172,6 +172,32 @@ public class MainMenu extends javax.swing.JFrame {
         login x = new login();
         x.setVisible(true);
         this.dispose();
+        
+        try{
+              Date currentDate = GregorianCalendar.getInstance().getTime();
+              DateFormat df = DateFormat.getDateInstance();
+              String dateString = df.format(currentDate);
+              Date d =new Date();
+              SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+              String timeString = sdf.format(d);
+              String value0= timeString;
+              String values = dateString;
+              int value = Emp.empId;
+              String reg = "INSERT INTO Audit(emp_id,date,status) VALUES ('"+value+"','"+value0+"/"+values+"','Logged out')";
+              pst = conn.prepareStatement(reg);
+              pst.execute();
+              this.dispose();
+            
+        }catch(Exception e){
+            
+        }finally{
+            try{
+                rs.close();
+                pst.close();
+            }catch(Exception e){
+                
+            }
+        }
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void EmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeActionPerformed
@@ -380,8 +406,7 @@ public class MainMenu extends javax.swing.JFrame {
           
            myDocument.add(new Paragraph("Employees Deduction List",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD )));
            myDocument.add(new Paragraph(new Date().toString()));
-           myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
-          table.addCell(new PdfPCell(new Paragraph("ID",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.BOLD))));
+           table.addCell(new PdfPCell(new Paragraph("ID",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.BOLD))));
           table.addCell(new PdfPCell(new Paragraph("First Name",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.BOLD))));
           table.addCell(new PdfPCell(new Paragraph("Surname",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.BOLD))));
           table.addCell(new PdfPCell(new Paragraph("Salary",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.BOLD))));
@@ -407,7 +432,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
            
            myDocument.add(table);
-           myDocument.add(new Paragraph("--------------------------------------------------------------------------------------------"));
            myDocument.close();  
            JOptionPane.showMessageDialog(null,"Report was successfully generated");
             
