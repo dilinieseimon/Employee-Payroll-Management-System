@@ -75,6 +75,12 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbl_emp = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
+        btn_EmployeeManager = new javax.swing.JButton();
+        btn_Search = new javax.swing.JButton();
+        btn_Allowance = new javax.swing.JButton();
+        btn_UpdateSalary = new javax.swing.JButton();
+        btn_Deduction = new javax.swing.JButton();
+        btn_Payment = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -82,6 +88,7 @@ public class MainMenu extends javax.swing.JFrame {
         EmployeeAllowance = new javax.swing.JMenuItem();
         EmployeeDeductions = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -96,6 +103,48 @@ public class MainMenu extends javax.swing.JFrame {
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logoutActionPerformed(evt);
+            }
+        });
+
+        btn_EmployeeManager.setText("Employee Manager");
+        btn_EmployeeManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EmployeeManagerActionPerformed(evt);
+            }
+        });
+
+        btn_Search.setText("Search");
+        btn_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchActionPerformed(evt);
+            }
+        });
+
+        btn_Allowance.setText("Allowance");
+        btn_Allowance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AllowanceActionPerformed(evt);
+            }
+        });
+
+        btn_UpdateSalary.setText("Update Salary");
+        btn_UpdateSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_UpdateSalaryActionPerformed(evt);
+            }
+        });
+
+        btn_Deduction.setText("Deduction");
+        btn_Deduction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeductionActionPerformed(evt);
+            }
+        });
+
+        btn_Payment.setText("Payment");
+        btn_Payment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PaymentActionPerformed(evt);
             }
         });
 
@@ -131,6 +180,15 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Audit");
+
+        jMenu5.setText("Audit trail");
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenu5);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("About");
@@ -143,22 +201,49 @@ public class MainMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_emp)
-                .addContainerGap(297, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_logout)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_logout))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_emp)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_EmployeeManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_UpdateSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Deduction, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_Payment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Allowance, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_logout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addGap(109, 109, 109)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_EmployeeManager, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_Allowance, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_Payment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Deduction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_UpdateSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbl_emp))
@@ -457,6 +542,41 @@ public class MainMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_EmployeeDeductionsActionPerformed
 
+    private void btn_EmployeeManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EmployeeManagerActionPerformed
+        addEmployee x = new addEmployee();
+        x.setVisible(true);        
+    }//GEN-LAST:event_btn_EmployeeManagerActionPerformed
+
+    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
+        addEmployee x = new addEmployee();
+        x.setVisible(true); 
+    }//GEN-LAST:event_btn_SearchActionPerformed
+
+    private void btn_AllowanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AllowanceActionPerformed
+        Allowance x = new Allowance();
+        x.setVisible(true); 
+    }//GEN-LAST:event_btn_AllowanceActionPerformed
+
+    private void btn_UpdateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateSalaryActionPerformed
+        UpdateSalary x = new UpdateSalary();
+        x.setVisible(true); 
+    }//GEN-LAST:event_btn_UpdateSalaryActionPerformed
+
+    private void btn_DeductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeductionActionPerformed
+        Deductions x = new Deductions();
+        x.setVisible(true); 
+    }//GEN-LAST:event_btn_DeductionActionPerformed
+
+    private void btn_PaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PaymentActionPerformed
+        searchempsalary x = new searchempsalary();
+        x.setVisible(true); 
+    }//GEN-LAST:event_btn_PaymentActionPerformed
+
+    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+        Audit x = new Audit();
+        x.setVisible(true);
+    }//GEN-LAST:event_jMenu5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -496,12 +616,19 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem Employee;
     private javax.swing.JMenuItem EmployeeAllowance;
     private javax.swing.JMenuItem EmployeeDeductions;
+    private javax.swing.JButton btn_Allowance;
+    private javax.swing.JButton btn_Deduction;
+    private javax.swing.JButton btn_EmployeeManager;
+    private javax.swing.JButton btn_Payment;
+    private javax.swing.JButton btn_Search;
+    private javax.swing.JButton btn_UpdateSalary;
     private javax.swing.JButton btn_logout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lbl_emp;

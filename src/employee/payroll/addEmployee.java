@@ -88,7 +88,7 @@ public class addEmployee extends javax.swing.JFrame {
         btn_delete = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Employee ID");
 

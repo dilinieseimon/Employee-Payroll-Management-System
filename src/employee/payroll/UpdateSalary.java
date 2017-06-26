@@ -5,6 +5,8 @@
  */
 package employee.payroll;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +27,10 @@ public class UpdateSalary extends javax.swing.JFrame {
     public UpdateSalary() {
         initComponents();
         conn = db.java_db();
+        
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
     }
 
     /**
@@ -59,7 +65,7 @@ public class UpdateSalary extends javax.swing.JFrame {
         txt_amount = new javax.swing.JTextField();
         btn_updateSalary = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Employee ID");
 
