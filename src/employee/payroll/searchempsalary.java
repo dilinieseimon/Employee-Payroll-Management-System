@@ -71,7 +71,7 @@ public class searchempsalary extends javax.swing.JFrame {
         txt_status = new javax.swing.JTextField();
         txt_designation = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_GenerateSlip = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,7 +108,12 @@ public class searchempsalary extends javax.swing.JFrame {
 
         jLabel15.setText("Designation");
 
-        jButton1.setText("Generate Slip");
+        btn_GenerateSlip.setText("Generate Slip");
+        btn_GenerateSlip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_GenerateSlipActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,7 +121,7 @@ public class searchempsalary extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(240, 240, 240)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_GenerateSlip, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(274, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -161,7 +166,7 @@ public class searchempsalary extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(297, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btn_GenerateSlip)
                 .addGap(48, 48, 48))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -266,6 +271,74 @@ try{
         } 
     }//GEN-LAST:event_txt_searchKeyReleased
 
+    private void btn_GenerateSlipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GenerateSlipActionPerformed
+        String value = txt_firstname.getText();
+        String value0 = txt_surname.getText();
+        String value1 = txt_id.getText();
+        String value2 = txt_designation.getText();
+        String value3 = txt_department.getText();
+        
+        JFileChooser dialog = new JFileChooser();
+        dialog.setSelectedFile(new File(value+" "+value0+"-Salary Slip"+".pdf"));
+        int dialogResult = dialog.showSaveDialog(null);
+        if(dialogResult==JFileChooser.APPROVE_OPTION){
+            String filePath = dialog.getSelectedFile().getPath();
+            
+            try{
+                String sql = "SELECT * FROM Deductions WHERE emp_id='"+value1+"'";
+                pst = conn.prepareStatement(sql);
+                rs=pst.executeQuery();
+                String val = rs.getString(5);
+                String reason = rs.getString(6);
+                rs.close();
+                pst.close();
+                
+                String sq = "SELECT * FROM Allowance WHERE emp_id='"+value1+"'";
+                pst = conn.prepareStatement(sq);
+                rs=pst.executeQuery();
+                
+                int calcTotal = Integer.parseInt(txt_salary.getText());
+                float x = Float.valueOf(rs.getString(9));
+                int v = Integer.parseInt(val);
+                float total = calcTotal +x-v;
+                
+                Document myDocument = new Document();
+                PdfWriter myWriter = PdfWriter.getInstance(myDocument, new FileOutputStream(filePath));
+                myDocument.open();
+                
+                myDocument.add(new Paragraph("PAY SLIP",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD)));
+                myDocument.add(new Paragraph(new Date().toString()));
+                myDocument.add(new Paragraph("------------------------------------------------------------------------------",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD)));
+                myDocument.add(new Paragraph("EMPLOYEE DETAILS",FontFactory.getFont(FontFactory.TIMES_BOLD,15,Font.BOLD)));
+                myDocument.add(new Paragraph("Name of Employee : "+value+""+value0,FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Designation : "+value2,FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Department : "+value3,FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("------------------------------------------------------------------------------",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD)));
+                myDocument.add(new Paragraph("SALARY : ",FontFactory.getFont(FontFactory.TIMES_BOLD,15,Font.BOLD)));
+                myDocument.add(new Paragraph("Basic Salary : "+calcTotal,FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Overtime : "+rs.getString(2),FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Medical : "+rs.getString(3),FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Bonus : "+rs.getString(4),FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Other : "+rs.getString(5),FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("------------------------------------------------------------------------------",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD)));
+                myDocument.add(new Paragraph("DEDUCTIONS : ",FontFactory.getFont(FontFactory.TIMES_BOLD,15,Font.BOLD)));
+                myDocument.add(new Paragraph("Deduction Details : "+reason,FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Total Deduction : "+val,FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("------------------------------------------------------------------------------",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD)));
+                myDocument.add(new Paragraph("TOTAL PAYMENT : ",FontFactory.getFont(FontFactory.TIMES_BOLD,15,Font.BOLD)));
+                myDocument.add(new Paragraph("Total Earnings : "+rs.getString(9),FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("Net Pay : "+total,FontFactory.getFont(FontFactory.TIMES,10,Font.PLAIN)));
+                myDocument.add(new Paragraph("------------------------------------------------------------------------------",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD)));
+                                
+                myDocument.newPage();
+                myDocument.close();
+                JOptionPane.showMessageDialog(null,"Report was Successfully Generated");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+        }
+    }//GEN-LAST:event_btn_GenerateSlipActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -302,7 +375,7 @@ try{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_GenerateSlip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
